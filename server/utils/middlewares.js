@@ -1,11 +1,25 @@
 
-// TODO: Move to middlewares folder
+/**
+ * Middleware to handle 404 Not Found errors.
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const notFound = (req, res, next) => {
     const error = new Error(`Not Found - ${req.originalUrl}`)
     res.status(404)
     next(error)
 };
 
+/**
+ * Middleware to handle erros generated from other upper middlewares.
+ * 
+ * @param {*} error 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const errorHandler = (error, req, res, next) => {
     const statusCode = res.status === 200 ? 500: res.statusCode
     res.status(statusCode)
@@ -15,7 +29,13 @@ const errorHandler = (error, req, res, next) => {
     });
 };
 
-// Helper function to exclude urls from middleware
+/**
+ * Unless helper function is used to decide wheter to apply an middleware 
+ * to a particular route or not.
+ * 
+ * @param {*} middleware Middleware to be called.
+ * @param  {...any} paths Paths to be ignored.
+ */
 const unless = function(middleware, ...paths){
     return function(req, res, next){
         const matchedPath = paths.some(path => path === req.path);

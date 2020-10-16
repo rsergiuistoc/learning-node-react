@@ -1,59 +1,61 @@
-const productController = {
 
+const categoriesController = {
+    
     /**
-     * Get All Products
+     * Get All Categories
      * 
      * @param {*} req 
      * @param {*} res 
      */
     getAll(req, res) {
 
-        res.status(200).send("Get All Products");
+        res.status(200).send("Get All Categories");
     },
 
     /**
-     * Get Product By Id
+     * Get Category By Id
      * 
      * @param {*} req 
      * @param {*} res 
      */
     getById(req, res){
 
-        res.status(200).send("Get Product By Id");
+        res.status(200).send("Get Category By Id");
     },
 
     /**
-     * Create Product
+     * Create Category
      * 
      * @param {*} req 
      * @param {*} res 
      */
     create(req, res){
 
-        res.status(200).send("Create Product");
+        const body = req.body;
+        res.status(200).send(body);
     },
 
     /**
-     * Update Product
+     * Update Category
      * 
      * @param {*} req 
      * @param {*} res 
      */
     update(req, res){
 
-        res.status(200).send("Update Product");
+        res.status(200).send("Update Category");
     },
 
     /**
-     * Delete Product
+     * Delete Category
      * 
      * @param {*} req 
      * @param {*} res 
      */
     delete(req, res){
 
-        res.status(200).send("Get Product By Id");
+        res.status(200).send("Get Category By Id");
     }
 };
 
-module.exports = productController;
+module.exports = categoriesController;

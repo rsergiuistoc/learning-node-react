@@ -5,7 +5,6 @@ const models = require('../models');
 const bodyParser = require('body-parser');
 const db = require('../models');
 const { User } = require('../models');
-const { token } = require('morgan');
 /*
     Another Approach is to separate the business logic from the route definition to a separate file,
     (e.g controllers), each handler will have a separate controller defined to it.
@@ -24,12 +23,11 @@ const verifyBasicAuthHeader = (req, res, next) => {
 module.exports = (app) => {
 
     /**
-     * Register User
+     * Register User Route
      */
     app.post(`/api/auth/register` , function(req, res){
 
         const body = req.body;
-        console.log(body);
         models.User.create({
             username: body.username,
             email: body.email,
@@ -43,7 +41,7 @@ module.exports = (app) => {
     });
 
     /**
-     * Login User
+     * Login User Route
      */
     app.post(`/api/auth/login`, verifyBasicAuthHeader, function(req, res){
         
@@ -88,7 +86,7 @@ module.exports = (app) => {
     });
 
     /**
-     * Logout User
+     * Logout User Route
      */
     app.post(`/api/auth/logout`, function(req, res){
         // Logout the current user, delete the token , remove the user object fromthe request object
@@ -97,7 +95,7 @@ module.exports = (app) => {
     });
 
     /**
-     * Logout User from all devices
+     * Logout User from all devices route
      */
     app.post(`/api/auth/logout-all`, function(req,res){
         
