@@ -1,3 +1,5 @@
+const { Category } = require('../models');
+const models = require('../models')
 
 const categoriesController = {
     
@@ -8,8 +10,16 @@ const categoriesController = {
      * @param {*} res 
      */
     getAll(req, res) {
-
-        res.status(200).send("Get All Categories");
+        
+        // Find all categories with all associated subcategories
+        const categories = models.Category.findAll({ include: [{
+            model: Category,
+            as: 'subcategories',
+            required: false,
+            attributes: ['id', 'name', 'orderNum']
+        }]}).then( categories =>{
+            return res.json(categories);
+        })
     },
 
     /**
@@ -20,7 +30,20 @@ const categoriesController = {
      */
     getById(req, res){
 
-        res.status(200).send("Get Category By Id");
+        models.Category.findOne({ 
+            include: [{
+                model: Category,
+                as: 'subcategories',
+                required: false,
+                attributes: ['id', 'name', 'orderNum']
+            }], 
+            where: { id: req.params.categoryId }
+        }).then( category => {
+            if ( !category ){
+                return res.send(404, {message: "Category not found"});
+            };
+            res.json(category);
+        });
     },
 
     /**
@@ -32,7 +55,38 @@ const categoriesController = {
     create(req, res){
 
         const body = req.body;
-        res.status(200).send(body);
+
+        models.Category.create({
+            name: body.name,
+            orderNum: body.orderNum
+        }).then(category => {
+           res.status(200).send(`Category ${category.name} has been succesfully created`); 
+        });
+    },
+
+    /**
+     * Create Subcategory
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
+    createSubCategory(req, res){
+
+        const body = req.body;
+
+        models.Category.findByPk(body.parentId).then(category => {
+            if ( !category ){
+                return res.send(404, {message:  "Category not found"});
+            }
+
+            models.Category.create({
+                name: body.name,
+                orderNum: body.orderNum
+            }).then( subcategory => {
+                category.addSubcategory(subcategory);
+                res.json(subcategory);
+            });
+        });
     },
 
     /**
@@ -43,7 +97,16 @@ const categoriesController = {
      */
     update(req, res){
 
-        res.status(200).send("Update Category");
+        const body = req.body;
+        models.Category.findByPk(req.params.categoryId).then( category => {
+            if ( !category ){
+                return res.send(404, {message: "Category not found"});
+            };
+
+            category.update(body);
+
+            res.json(category)
+        });
     },
 
     /**
@@ -54,7 +117,16 @@ const categoriesController = {
      */
     delete(req, res){
 
-        res.status(200).send("Get Category By Id");
+        models.Category.findByPk(req.params.categoryId).then( category => {
+            if ( !category ){
+                return res.send(404, {message: "Category not found"});
+            };
+
+            category.destroy();
+
+            res.send(200, {message: "Category succesfully deleted"});
+        });
+        
     }
 };
 

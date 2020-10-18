@@ -51,7 +51,7 @@ db.Token.belongsTo(db.User, {foreignKey: "userId", as: "user"});
 db.Category = createCategory(sequelize, Sequelize);
 
 // Self Referencing the Category to same in order to create SubCategories
-db.Category.hasMany(db.Category, { as: "subcategories", foreignKey: "parentId", useJunctionTable: false});
+db.Category.hasMany(db.Category, { as: "subcategories", foreignKey: "parentId", onDelete: 'cascade', useJunctionTable: false});
 
 
 // Product Models
