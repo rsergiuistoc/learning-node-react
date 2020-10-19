@@ -42,6 +42,7 @@ app.get('/', function(req, res){
 
 // Import routes
 require('./routes/auth')(app);
+require('./routes/roles')(app);
 require('./routes/categories')(app);
 require('./routes/products')(app);
 
