@@ -6,9 +6,15 @@ const createUserModel = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        username: Sequelize.STRING, 
+        username: {
+            type: Sequelize.STRING,
+            unique: true
+        },
         password: Sequelize.STRING,
-        email: Sequelize.STRING,
+        email: {
+           type:  Sequelize.STRING,
+           unique: true
+        },
         joined: Sequelize.DATE,
     });
 

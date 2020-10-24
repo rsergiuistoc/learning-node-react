@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 
 const userModels = require('./user');
 const createCategory = require('./category');
+const productModels = require('./products');
 
 // TODO: Decoment after testing routes
 
@@ -39,6 +40,7 @@ db.sequelize = sequelize;
 db.User = userModels.createUserModel(sequelize, Sequelize);
 db.Role = userModels.createRoleModel(sequelize, Sequelize);
 db.Token = userModels.createTokenModel(sequelize, Sequelize);
+db.Product = productModels(sequelize, Sequelize);
 
 db.User.belongsToMany(db.Role, {through: 'user_roles', foreignKey: 'userId'});
 db.Role.belongsToMany(db.User, {through: 'user_roles', foreignKey: 'roleId'});
