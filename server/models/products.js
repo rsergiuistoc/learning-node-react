@@ -1,31 +1,33 @@
 module.exports = (sequelize, Sequelize) => {
 
     // Variation Model
-    const variations = sequelize.define('variations', {
+    const options = sequelize.define('options', {
         name: Sequelize.STRING,
     });
 
     // Variation Values Model
-    const variationValues = sequelize.define('variation_values', {
+    const optionValues = sequelize.define('optionValues', {
         name: Sequelize.STRING,
     });
 
-    variations.hasMany(variationValues, {as: 'values'});
-    variationValues.belongsTo(variations, { foreignKey: "fk_valueId", as: "value"});
+    options.hasMany(optionValues, {as: 'values'});
+    optionValues.belongsTo(options, { foreignKey: "fk_valueId", as: "value"});
 
     // Product Model
     const products = sequelize.define('products', {
-
+        name: Sequelize.STRING,
     });
+
+    products.hasMany(options, {as: 'options'});
+    options.belongsTo(products, {foreignKey: 'fk_productId', as: 'option'});
 
     // Product Detail Model
     const productDetails = sequelize.define('product_details', {
-
         description: Sequelize.STRING,
     });
 
-    products.hasOne(productDetails, {as: "details"})
-    productDetails.belongsTo(products, {foreignKey: 'fk_productId', as: 'detail'})
+    products.hasOne(productDetails, {as: "details"});
+    productDetails.belongsTo(products, {foreignKey: 'fk_productId', as: 'detail'});
 
     // Product Variation Model
     const productVariations = sequelize.define('product_variations', {
@@ -35,35 +37,36 @@ module.exports = (sequelize, Sequelize) => {
         },
         sku: Sequelize.STRING,
         price: Sequelize.DOUBLE,
+        slug: Sequelize.STRING
     });
 
     products.hasMany(productVariations, {as: 'variations'});
     productVariations.belongsTo(products, { foreignKey: "fk_variationId", as: "variation"});
 
-    // Product Images Model
-    const productImages = sequelize.define('product_images', {
+    // // Product Images Model
+    // const productImages = sequelize.define('product_images', {
         
-    });
+    // });
 
-    // Stock Model
-    const stocks = sequelize.define('stocks', {
+    // // Stock Model
+    // const stocks = sequelize.define('stocks', {
 
-        stock: Sequelize.INTEGER,
-        unitPrice: Sequelize.DOUBLE,
-        totalPrice: Sequelize.DOUBLE
+    //     stock: Sequelize.INTEGER,
+    //     unitPrice: Sequelize.DOUBLE,
+    //     totalPrice: Sequelize.DOUBLE
 
-    });
+    // });
 
-    productVariations.hasOne(stocks, {as: "stock"});
-    stocks.belongsTo(productVariations, {foreignKey: "fk_product_variation_id", as: "stock"});
+    // productVariations.hasOne(stocks, {as: "stock"});
+    // stocks.belongsTo(productVariations, {foreignKey: "fk_product_variation_id", as: "stock"});
 
-    // Discount Model
-    const discounts = sequelize.define('discounts', {
-        percentage: Sequelize.INTEGER
-    });
+    // // Discount Model
+    // const discounts = sequelize.define('discounts', {
+    //     percentage: Sequelize.INTEGER
+    // });
 
-    productVariations.hasOne(discounts, {as: 'discount'});
-    discounts.belongsTo(productVariations, { foreignKey: "fk_valueId", as: "value"});
+    // productVariations.hasOne(discounts, {as: 'discount'});
+    // discounts.belongsTo(productVariations, { foreignKey: "fk_valueId", as: "value"});
 
     return products;
 }

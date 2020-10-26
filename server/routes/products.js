@@ -10,7 +10,7 @@ module.exports = (app) => {
     /**
      * Get Product By Id Route
      */
-    app.get(`api/products/:productId`, productController.getById);
+    app.get(`api/products/:slugId`, productController.getById);
 
     /**
      * Filter Product
@@ -25,12 +25,12 @@ module.exports = (app) => {
     /**
      * Update Product Route
      */
-    app.put(`api/products/:productId`, productController.update);
+    app.put(`api/products/:slugId`, productController.update);
 
     /**
      * Delete Product by Id Route
      */
-    app.delete(`api/products/:productId`, productController.delete);
+    app.delete(`api/products/:slugId`, productController.delete);
 
 
 }
