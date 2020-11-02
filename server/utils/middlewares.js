@@ -38,7 +38,7 @@ const errorHandler = (error, req, res, next) => {
  */
 const unless = function(middleware, ...paths){
     return function(req, res, next){
-        const matchedPath = paths.some(path => path === req.path);
+        const matchedPath = paths.some(path => req.path.match(path));
         return matchedPath ? next() : middleware(req, res, next);
     }
 }

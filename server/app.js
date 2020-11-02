@@ -33,8 +33,11 @@ const app = express();
 
 // Setup Middlewares
 app.use(morgan());
-app.use(bodyParser.json());
-app.use(unless(require('./middlewares/authentication'), '/api/auth/login', '/api/auth/register'));
+app.use(bodyParser.json()); 
+app.use(unless(require('./middlewares/authentication'), 
+    '/api/auth/login', '/api/auth/register', 
+    '/api/reset-password/(.*?)', 
+    ));
 
 app.get('/', function(req, res){
     res.send("Access granted");
@@ -42,9 +45,11 @@ app.get('/', function(req, res){
 
 // Import routes
 require('./routes/auth')(app);
+require('./routes/user')(app);
 require('./routes/roles')(app);
 require('./routes/categories')(app);
 require('./routes/products')(app);
+
 
 app.use(notFound);
 app.use(errorHandler);
