@@ -1,0 +1,42 @@
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    float: left;
+}
+
+a {
+    display: block;
+}
+
+#navbar {
+   background-color: #232f3e; 
+}
+
+#navbar-search{
+    overflow: hidden;
+}
+
+#navbar-hamburger-menu {
+    height: 40px;
+    margin: 10px 7px 10px 7px;
+    padding: 10px 8px 10px 8px;
+    font-size: 25px;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid #666;
+}
+
+.nav-mid {
+    display: flex;
+}
+
+.navbar-search-submit { 
+    background-color: #febd69;
+    background-image: none;
+    width: 45px;
+    border: none;
+}
