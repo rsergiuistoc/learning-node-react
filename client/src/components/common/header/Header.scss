@@ -1,42 +1,104 @@
-ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    float: left;
-}
-
-a {
-    display: block;
+header {
+    height: 100px;
 }
 
 #navbar {
    background-color: #232f3e; 
+   display: flex;
+   height: 60px;
 }
 
-#navbar-search{
-    overflow: hidden;
-}
+.navbar-hamburger-menu{
 
-#navbar-hamburger-menu {
+    width: 38px;
+    border-radius: 3px; 
+    border: 1px solid #666;
     height: 40px;
     margin: 10px 7px 10px 7px;
     padding: 10px 8px 10px 8px;
-    font-size: 25px;
-    color: #fff;
-    border-radius: 3px;
-    border: 1px solid #666;
 }
 
-.nav-mid {
+#navbar-search{
+    position: static;
+    float: none;
     display: flex;
+    padding: 10px 4px 10px 3px;
+    height: 60px;
+}
+.navbar-searchbar{
+    display: flex;
+    height: 40px;
 }
 
-.navbar-search-submit { 
-    background-color: #febd69;
-    background-image: none;
+.navbar-search-options{
+    background-color: #f3f3f3;
+    border-left: 1px solid #f3f3f3;
+    border-top: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+    display: flex;
+    height: 40px;
     width: 45px;
-    border: none;
+    border-radius: 4px 0 0 4px;
+    color: #555;
+    cursor: pointer;
 }
+
+.navbar-search-options span{
+    color: #555;
+    font-size: 13px;
+}
+
+.navbar-search-icon{
+    background-color: #febd69;
+    border-radius: 0 4px 4px 0;
+    height: 42px;
+    width: 45px;
+    cursor: pointer;
+    top: 10px;
+    left: 12px;
+}
+
+.navbar-search-submit input {
+    overflow: hidden;
+    height: 40px;
+    border: 0;
+}
+
+.navbar-input{
+    color: #111;
+    background: #fff;
+    width: 100%;
+    margin: 0;
+    border: 0;
+    height: 38px;
+    width: 737px;
+    font-family: inherit;
+    font-size: 15px;
+    outline: 0;
+    box-shadow: none;
+    text-indent: 8px;
+}
+
+.navbar-right{
+    display: flex;
+    position: static;
+    float: none;
+}
+
+.navbar-line-1 {
+    display: flex;
+    margin-top: 9px;
+    align-items: center;
+}
+
+.navbar-line-2 {
+    display: flex;
+    align-items: center;
+}
+
+.nav-a {
+    display: flex;
+    padding: 0 9px 10px;
+    align-items: flex-start;
+}
+

@@ -11,6 +11,7 @@ import "./App.scss";
 
 import Header from "./components/common/header/Header"
 import Home from "./components/pages/home/Home"
+import Login from "./components/pages/login/Login"
 import Footer from "./components/common/footer/Footer"
 
 class App extends Component{
@@ -18,12 +19,15 @@ class App extends Component{
     return(
       <div className="App">
         <Router>
-           <Header />
-           <Route exact path="/" component={Home}></Route>
-           <Route path="/login"><h1> Login </h1></Route>
-           <Route path="/cart"><h1> Cart </h1></Route>
+          <Switch>
+            <Route exact path="/">
+              <Header />
+              <Home />
+              <Footer />
+            </Route>
+            <Route path="/login"><Login /></Route>
+          </Switch>
         </Router>
-        <Footer />
       </div>
     );
   }

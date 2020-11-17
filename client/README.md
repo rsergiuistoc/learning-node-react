@@ -1,8 +1,8 @@
-## React.js Notes
+# React.js Notes
 
 Here are some important notes about react which I wrote down through my learning
 
-### Create Custom Development Toolchain
+## Create Custom Development Toolchain
 
 Facebook has provided an easy way to setup an development environment through `create-react-app`. Why should we not use this ?
 
@@ -61,3 +61,16 @@ Those two examples from above are equivalent from React's point of view.
 
 Rule of thumb, if a component repeats itself and has many usages all over the app, or it
 is complex enough to be a part of its own implementation.
+
+## Styling in React
+
+### Separate File
+
+In my opinion this is the easiest approach to use here, simple enough for anybody to understand. We extract all our css styling in a separate
+file with the extention: `.css`, `scss`, etc, and after that we import the file in our `.jsx` file and apply them.
+
+### Styled Components
+
+### CSS in JS
+
+### Inline CSS
