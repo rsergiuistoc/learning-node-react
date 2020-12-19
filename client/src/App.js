@@ -12,6 +12,7 @@ import "./App.scss";
 import Header from "./components/common/header/Header"
 import Home from "./components/pages/home/Home"
 import Login from "./components/pages/login/Login"
+import Register from "./components/pages/register/Register"
 import Footer from "./components/common/footer/Footer"
 
 class App extends Component{
@@ -26,6 +27,7 @@ class App extends Component{
               <Footer />
             </Route>
             <Route path="/login"><Login /></Route>
+            <Route path="/register"><Register /></Route>
           </Switch>
         </Router>
       </div>

@@ -74,3 +74,69 @@ file with the extention: `.css`, `scss`, etc, and after that we import the file 
 ### CSS in JS
 
 ### Inline CSS
+
+
+## React Forms
+
+### Controlled Forms
+
+### Uncontrolled Forms
+
+### Handle Inputs
+
+### Handle Form Validation
+
+Extremley common for web applications. 
+
+Create form context that holds all the states for all interactions from inputs.
+
+We need: 
+- Form data -> for user's input
+- Validations -> for field specific validations
+- Errors -> for field specific errors
+
+
+## React Composition Model
+Allows you to build your application as a set of reusable components.
+
+
+## Sending Request to Server with React
+
+### Axios
+A Javascript library used to make HTTP requests from node.js or XMLHttpRequests, supports Promise API and is native to JS ES6
+
+Advantages
+
+- Wide range browser support
+- Handles XSRF protection over requests 
+- Automatic JSON data transformation
+
+Overall Axios provides an easy-to-use way to deal with HTTP requests. It is also possible to reproduce some of its key-features using `fetch()` 
+method provided by web browsers. 
+
+### Fetch API
+The Fetch API provides `fetch() method` defined on the window object. It also provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline ( requests and responses ), uses Promises to retrieve the response from request.
+
+
+## Configure React for Multi Environment stages
+
+
+### JSON file
+You can store the configuration data in a JSON file. And then load the file using the `import` statement. Then you can use the data as any other Javascript object.
+
+```
+{
+    "SERVER_URL": "https://example.com/api,
+}
+```
+
+```
+import configData from "./config.json";
+
+const serverUrl = configData.SERVER_URL;
+```
+
+### .env File
+
+### WebPack
+In webpack, there is a configuration option called `externals`, which provides a way of excluding dependencies from the bundles.
