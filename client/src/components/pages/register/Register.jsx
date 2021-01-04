@@ -6,6 +6,7 @@ import {
     validatePassword,
     validateConfirmPassword
 } from "../../../utils/Validator"
+import AuthenticationService from "../../../api/AuthenticationService";
 
 class Register extends React.Component{
 
@@ -21,6 +22,7 @@ class Register extends React.Component{
             validForm: false,
         }
 
+        this.authenticationService = new AuthenticationService();
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -46,12 +48,7 @@ class Register extends React.Component{
         const confirmPasswordError = this.state.confirmPassword.validator(this.state.password.value, this.state.confirmPassword.value);
 
         if([emailError, passwordError, confirmPasswordError].every( e => e === false)){
-            axios.post(process.env.SERVER_URL + "/auth/register"
-
-            ).then().catch( error => {
-
-            })
-            this.setState(...this.state);
+            this.authenticationService.register();
         }else{
             this.setState( state => ({
                 email: {

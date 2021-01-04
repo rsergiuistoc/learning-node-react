@@ -2,6 +2,7 @@ import React from "react"
 import axios from "axios"
 import { Link } from "@material-ui/core";
 
+import AuthenticationService from "../../../api/AuthenticationService";
 
 class Login extends React.Component{
 
@@ -14,6 +15,7 @@ class Login extends React.Component{
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.authenticationService = new AuthenticationService();
     }
 
     handleInputChange(event){
@@ -27,21 +29,7 @@ class Login extends React.Component{
     }
 
     handleSubmit(event) {
-        //TODO: remove this after  finishind funcitonality
-        
-        axios.post("http://localhost:8080/api/auth/login", 
-        {
-            email: this.state.email,
-            password: this.state.password
-        }).then( (response) => {
-            console.log(data);
-            if (response.data.accessToken){
-                localStorage.setItem("token", JSON.stringify(response.data));
-            }
-        }).catch( error => {
-            console.log(error);
-        })
-
+        this.authenticationService.login(this.state.email, this.state.password);
         console.log(this.state.email + ' ' + this.state.password);
         event.preventDefault(); // prevents the page being refreshed on form submissio ( which is the default behaviour)
     }
