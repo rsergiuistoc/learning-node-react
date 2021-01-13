@@ -1,72 +1,65 @@
 import React from "react"
+import axios from "axios"
+import { Link } from "@material-ui/core";
 
-import {
-    Link    
-} from "react-router-dom"
-
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-
-import "./Login.scss"
+import AuthenticationService from "../../../api/AuthenticationService";
 
 class Login extends React.Component{
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.authenticationService = new AuthenticationService();
+    }
+
+    handleInputChange(event){
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        this.authenticationService.login(this.state.email, this.state.password);
+        console.log(this.state.email + ' ' + this.state.password);
+        event.preventDefault(); // prevents the page being refreshed on form submissio ( which is the default behaviour)
+    }
+
     render(){
         return (
-            <div className="auth-section auth-padding-medium">
-                <div className="auth-navbar">
-
+            <div className="auth-section">
+                <div className="auth-form-navbar">
+                     <h1>Sign-In</h1>
                 </div>
-                <div id="auth-center-section">
-                    <div id="auth-main-section">
-                        <div className="auth-form-container">
-                            <div className="auth-section">
-                                <div className="auth-section">
-                                    <form name="signin" method="post" className="auth-validate-form">
-                                        <div className="auth-section">
-                                            <div className="auth-form-box">
-                                                <div className="auth-form-box-inner">
-                                                    <h1>Sign-In</h1>
-                                                    <div className="auth-row">
-                                                        <label for="auth-email-field" class="auth-form-label">Email or mobile phone number</label>
-                                                        <input type="email" name="email" id="auth-email-field" className="auth-input-text auth-span-12"/>
-                                                    </div>
-                                                    <div className="auth-section">
-                                                        <span id="continue-btn" className="auth-button">
-                                                            <input id="continue" type="submit" value="Continue"/>
-                                                        </span>
-                                                        <div id="legal-text-row">
-                                                            By continuing, you agree to Amazon's
-                                                            <Link to="signin_notification_condition_of_use"> Conditions of Use</Link> and 
-
-                                                             <Link to="signin_notification_privacy_notice">Privacy Notice</Link>
-                                                        </div>
-                                                    </div>
-                                                    <div className="auth-section">
-                                                        <Link to="/help_page">
-                                                            <ArrowDropDownIcon></ArrowDropDownIcon>
-                                                            <span className="auth-expander-prompt">
-                                                                Need help?
-                                                            </span>
-                                                        </Link>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="auth-divider divider-break">
-                                    <h5>New to Amazon?</h5>
-                                </div>
-                                <span id="auth-create-account-link" className="auth-button auth-button-span12">
-                                    <span class="auth-btn-inner">
-                                        <Link to="/register" className="auth-button-text" role="button">Create your Amazon account</Link>
-                                    </span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                <div className="auth-form-container">
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Email:
+                            <input name="email" type="text" value={this.state.email} onChange={this.handleInputChange} />
+                        </label>
+                        <label>
+                            Password:
+                            <input name="password" type="password" value={this.state.password} onChange={this.handleInputChange} />
+                        </label>
+                        <input type="submit" value="Sign In" />
+                     </form>
                 </div>
-                <div className="auth-footer">
-
+        
+                <div className="auth-form-footer">
+                    <span> No account ? 
+                        <Link path="/register">
+                            Create one
+                        </Link>
+                    </span>
                 </div>
             </div>
         );
